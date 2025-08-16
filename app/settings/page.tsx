@@ -7,13 +7,15 @@ export default function SettingsPage() {
   const [stickyText, setStickyText] = useState('Name: Justin\nPets: Molly (dog), Rex (dog), Link (cat)\nTone: Direct, honest, practical\nFaith: Bold Christian, not watered-down');
 
 useEffect(()=>{
+async function saveSticky(stickyText: string) {
   const pass = (typeof window !== 'undefined' && localStorage.getItem('pw')) || '';
-  fetch('/api/memories/sticky', { headers: { 'X-App-Pass': pass }})
-    .then(r=>r.json()).then(d=>{
-      setStickyText(d.seed || stickyText);
-      setModel(d.model || '');
-    });
-},[]);
+  const res = await fetch('/api/memories/sticky', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-App-Pass': pass },
+    body: JSON.stringify({ seed: stickyText }),
+  });
+  return res.json();
+}
   
 const pass = (typeof window !== 'undefined' && localStorage.getItem('pw')) || '';
 const res = await fetch('/api/memories/sticky', {
