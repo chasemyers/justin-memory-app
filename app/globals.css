@@ -1,0 +1,16 @@
+
+:root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; }
+body { margin: 0; background: #0b0c10; color: #e2e2e2; }
+.container { max-width: 900px; margin: 0 auto; padding: 16px; }
+header { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+header a { color: #9ad1ff; margin-right: 12px; text-decoration: none; }
+header a:hover { text-decoration: underline; }
+main { margin-top: 12px; }
+input, textarea, button, select { background: #15171d; color: #e2e2e2; border: 1px solid #2b2f3a; border-radius: 8px; padding: 10px; }
+button { cursor: pointer; }
+.card { background: #111319; border: 1px solid #232733; border-radius: 10px; padding: 12px; margin: 8px 0; }
+.row { display: flex; gap: 8px; }
+.small { font-size: 12px; color: #9aa0a6; }
+textarea { width: 100%; min-height: 120px; }
+.message { white-space: pre-wrap; }
+.tag { display: inline-block; padding: 2px 6px; font-size: 12px; border: 1px solid #2b2f3a; border-radius: 8px; margin-right: 4px; }
