@@ -21,11 +21,13 @@ export default function Page() {
     setMsgs(m => [...m, { role: 'user', content: message }]);
     setInput('');
 
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message }),
-    });
+const pass = (typeof window !== 'undefined' && localStorage.getItem('pw')) || '';
+
+const res = await fetch('/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'X-App-Pass': pass },
+  body: JSON.stringify({ message }),
+});
     if (!res.ok) {
       const t = await res.text();
       setMsgs(m => [...m, { role: 'assistant', content: `Error: ${t}` }]);
