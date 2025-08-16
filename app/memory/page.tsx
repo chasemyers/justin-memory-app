@@ -10,11 +10,12 @@ export default function MemoryPage() {
   const [stickyOnly, setStickyOnly] = useState(false);
 
   async function runSearch() {
-    const res = await fetch('/api/memories/search', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ q, stickyOnly })
-    });
+const pass = (typeof window !== 'undefined' && localStorage.getItem('pw')) || '';
+const res = await fetch('/api/memories/search', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'X-App-Pass': pass },
+  body: JSON.stringify({ q, stickyOnly })
+});
     const data = await res.json();
     setItems(data.items || []);
   }
