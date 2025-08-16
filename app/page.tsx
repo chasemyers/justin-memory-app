@@ -40,11 +40,12 @@ const res = await fetch('/api/chat', {
 
   async function saveAll() {
     if (!proposed.length) return;
-    const res = await fetch('/api/memories/upsert', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ entries: proposed }),
-    });
+const pass = (typeof window !== 'undefined' && localStorage.getItem('pw')) || '';
+const res = await fetch('/api/memories/upsert', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json', 'X-App-Pass': pass },
+  body: JSON.stringify({ entries: proposed }),
+});
     if (!res.ok) {
       const t = await res.text();
       alert('Save failed: ' + t);
