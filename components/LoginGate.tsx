@@ -10,11 +10,16 @@ export default function LoginGate({ children }:{children:React.ReactNode}){
     if (v === '1') setOk(true);
   },[]);
 
-  async function submit() {
-    const res = await fetch('/api/ping', { headers: { 'X-App-Pass': pw } });
-    if (res.ok) { localStorage.setItem('pw-ok','1'); setOk(true); }
-    else alert('Wrong password.');
+async function submit() {
+  const res = await fetch('/api/ping', { headers: { 'X-App-Pass': pw } });
+  if (res.ok) {
+    localStorage.setItem('pw-ok', '1');
+    localStorage.setItem('pw', pw);       // <— store for later requests
+    setOk(true);
+  } else {
+    alert('Wrong password.');
   }
+}
 
   if (ok) return <>{children}</>;
   return (
